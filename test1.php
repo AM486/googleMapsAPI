@@ -34,7 +34,6 @@ td:hover{
 </style>
 
 <script>
-
 myCenter=new google.maps.LatLng(40.668156, 22.930170);
 initZoom=5;
 
@@ -51,14 +50,12 @@ var myHood = new google.maps.Circle({
 	  position:myCenter,
 	  animation:google.maps.Animation.BOUNCE
 });   
-
 var mapProp = {	
 	center:myCenter,
 	zoom:initZoom,
 	mapTypeId:google.maps.MapTypeId.TERRAIN 
 };
 var map='';
-
 //initialize
 function initialize(){
   	map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
@@ -66,22 +63,32 @@ function initialize(){
 	initMarker.setMap(map);
 
 	zooming(map,initMarker) ;
-
+	addInfoWindow(map,initMarker)
 };
-
 function zooming(map,marker){
 	google.maps.event.addListener(marker,'click',function() {
-		var zoom=map.getZoom();
-		//check if deleting
+		var zoom=map.getZoom();	
+	// if deleting no zoom on  click
 		if (!document.getElementsByName('removeMarker')[0].checked){	
 			zoom+=2;	
 			map.setZoom(zoom);
 			map.setCenter(marker.getPosition());
 		}
 	});
-	
 }
 
+function addInfoWindow(map,marker){
+	var infowindow = new google.maps.InfoWindow({
+		content: 'Latitude: ' + marker.getPosition().lat() + '<br>Longitude: ' + marker.getPosition().lng()
+	});
+	//hover InfoWindow  Listener
+	google.maps.event.addListener(marker, "mouseover", function(){
+		  infowindow.open(map,marker);
+	} );
+	google.maps.event.addListener(marker, "mouseout", function(){
+		  infowindow.close(map,marker);
+	} );
+}
 function placeMarker(pos){
 	var marker =new  google.maps.Marker({
 		position: pos,
@@ -90,7 +97,9 @@ function placeMarker(pos){
 	});
    
 	zooming(map,marker)
-	//remove Listener
+	addInfoWindow(map,marker)
+	
+	//removeMarker Listener
 	google.maps.event.addListener(marker, "click", function(){
 	
 		if (document.getElementsByName('removeMarker')[0].checked){
@@ -110,7 +119,6 @@ function placeMarker(pos){
 
 	
  }
-
 function addMarker(){	
 	if (document.getElementsByName('addMarker')[0].checked){
 		document.getElementsByName('removeMarker')[0].checked=false;
@@ -119,7 +127,6 @@ function addMarker(){
 		google.maps.event.clearListeners( map,'click');
 	}
 }
-
 //remove initMarker
 function removeMarker(){	
 	if (document.getElementsByName('removeMarker')[0].checked){
@@ -135,8 +142,6 @@ function removeMarker(){
 		zooming(map,initMarker) ;
 	}
 } 
-
-
  function getRadius(val){
 	myHood.setRadius(parseInt(val));	 
 };
