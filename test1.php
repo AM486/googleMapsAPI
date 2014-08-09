@@ -22,51 +22,43 @@ body{
 	margin-bottom:5px;	
 }
 
-  td  {						
-		border-right: 1px solid lightgray ;
-		border-radius: 10px;
-		padding-left: 5px;
-		width:50px
-		display:inline;
-	} 
-/* table{
-	height: 30px;
-} */
-
-
-
+td  {						
+	border-right: 1px solid lightgray ;
+	border-radius: 10px;
+	padding-left: 5px;
+	width:50px
+	display:inline;
+} 
 
 td:hover{
-background-color: silver  ;
+	background-color: silver  ;
 }
-
-
 </style>
+
 <script>
 
 myCenter=new google.maps.LatLng(40.668156, 22.930170);
 initZoom=5;
 
 var myHood = new google.maps.Circle({
-			  center:myCenter,
-			  radius:0,
-			  strokeColor:"#009b8e",
-			  strokeOpacity:0.8,
-			  strokeWeight:2,
-			  fillColor:"#009b8e",
-			  fillOpacity:0.4
-			 });
+	  center:myCenter,
+	  radius:0,
+	  strokeColor:"#009b8e",
+	  strokeOpacity:0.8,
+	  strokeWeight:2,
+	  fillColor:"#009b8e",
+	  fillOpacity:0.4
+ });
  var initMarker=new google.maps.Marker({
 	  position:myCenter,
 	  animation:google.maps.Animation.BOUNCE
 });   
 
-			 
-	var mapProp = {	
-		center:myCenter,
-		zoom:initZoom,
-		mapTypeId:google.maps.MapTypeId.TERRAIN 
-    };
+var mapProp = {	
+	center:myCenter,
+	zoom:initZoom,
+	mapTypeId:google.maps.MapTypeId.TERRAIN 
+};
 var map='';
 
 //initialize
@@ -76,12 +68,10 @@ function initialize(){
 	initMarker.setMap(map);
 
 	zooming(map,initMarker) ;
-  
 
 };
 
 function zooming(map,marker){
-	
 	google.maps.event.addListener(marker,'click',function() {
 		var zoom=map.getZoom();
 		//check if deleting
@@ -93,7 +83,6 @@ function zooming(map,marker){
 	});
 	
 }
-
 
 function placeMarker(pos){
 	var marker =new  google.maps.Marker({
@@ -118,8 +107,7 @@ function placeMarker(pos){
 			google.maps.event.clearListeners( initMarker,'click');
 			zooming(map,initMarker) ;
 		}
-	
-	
+
 	} );
 
 	
