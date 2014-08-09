@@ -9,9 +9,7 @@ body{
 	font-family: courier;
 	
 }
-/* table{
-	background-color: red ;
-} */
+
 #toolbar {	
 	width:800px;
 	height: 30px;
