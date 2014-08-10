@@ -14,8 +14,6 @@ function addMarker(location){
 		position:location,
 		draggable:true,
 		animation:google.maps.Animation.BOUNCE
-		
-
 	  });
 	 
 	//add infowindow
